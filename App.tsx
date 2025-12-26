@@ -4,6 +4,8 @@ import ClientGallery from './components/ClientGallery';
 import ClientLogin from './components/ClientLogin';
 import * as api from './services/api';
 
+import { CONFIG } from './config';
+
 // Simple Review Component for Serverless Mode
 const SimpleReview = ({ photos, selectedIds, onBack }: any) => {
   const selectedPhotos = photos.filter((p: Photo) => selectedIds.has(p.id));
@@ -17,7 +19,7 @@ const SimpleReview = ({ photos, selectedIds, onBack }: any) => {
   const handleWhatsApp = () => {
      const text = selectedPhotos.map((p: Photo) => p.name).join('\n');
      const msg = encodeURIComponent(`Halo, ini daftar foto pilihan saya (${selectedPhotos.length} foto):\n\n${text}`);
-     window.open(`https://wa.me/?text=${msg}`, '_blank');
+     window.open(`https://wa.me/${CONFIG.WHATSAPP_NUMBER}?text=${msg}`, '_blank');
   };
 
   return (
