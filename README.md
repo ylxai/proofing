@@ -1,20 +1,69 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Hafiportrait | Photo Proofing
 
-# Run and deploy your AI Studio app
+Web application for clients to view and select photos directly from Google Drive. Designed for **Hafiportrait** workflow.
 
-This contains everything you need to run your app locally.
+## Features 🌟
 
-View your app in AI Studio: https://ai.studio/apps/temp/1
+- **Google Drive Integration**: Connects directly to Google Drive folders using an API Key. No backend database required.
+- **Photo Selection**: Clients can select their favorite photos.
+- **WhatsApp Integration**: Send the list of selected photos directly to the photographer via WhatsApp.
+- **Watermark Protection**: Configurable watermark (Text, Rotation, Size, Opacity) to protect your work.
+- **Responsive Design**: Optimized for both Desktop and Mobile devices.
+- **Direct Drive Access**: "Open in Drive" button for quick access to high-res files (optional).
 
-## Run Locally
+## Configuration ⚙️
 
-**Prerequisites:**  Node.js
+### 1. Environment Variables
 
+Create a `.env` file in the root directory (copy from `.env.example`):
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+```env
+VITE_GOOGLE_API_KEY=your_google_api_key_here
+```
+
+### 2. App Configuration (`config.ts`)
+
+You can customize the application settings in `src/config.ts`:
+
+- **Watermark**: Enable/Disable, Text, Rotation, Size, Opacity.
+- **Contact**: Update `WHATSAPP_NUMBER` to receive selections.
+
+```typescript
+export const CONFIG = {
+  // ...
+  WATERMARK: {
+    ENABLED: true,
+    TEXT: "Hafiportrait",
+    // ...
+  },
+  WHATSAPP_NUMBER: "62895700503193",
+};
+```
+
+## Development 💻
+
+1. **Install Dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+2. **Run Locally**:
+
+   ```bash
+   npm run dev
+   ```
+
+3. **Build for Production**:
+   ```bash
+   npm run build
+   ```
+
+## Deployment 🚀
+
+This app is ready for deployment on **Vercel** or **Netlify**.
+
+1. Push to GitHub.
+2. Import project in Vercel.
+3. Add `VITE_GOOGLE_API_KEY` in Vercel Environment Variables.
+4. Deploy!
