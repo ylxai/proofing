@@ -17,6 +17,16 @@ export const getEvents = async (): Promise<Event[]> => {
 };
 
 export const getEventDetails = async (folderId: string): Promise<Event> => {
+  // DEMO MODE
+  if (folderId === 'demo') {
+    return {
+      id: 'demo',
+      name: 'Demo Gallery (Pagination Test)',
+      code: 'demo',
+      createdAt: Date.now(),
+    };
+  }
+
   checkApiKey();
   const url = `${BASE_URL}/files/${folderId}?fields=id,name,createdTime&key=${API_KEY}`;
   const response = await fetch(url);
@@ -38,6 +48,17 @@ export const getEventDetails = async (folderId: string): Promise<Event> => {
 // --- PHOTOS ---
 
 export const getPhotos = async (folderId: string): Promise<Photo[]> => {
+  // DEMO MODE
+  if (folderId === 'demo') {
+    return Array.from({ length: 100 }).map((_, i) => ({
+      id: `mock-${i}`,
+      name: `Photo ${i + 1}.jpg`,
+      url: `https://via.placeholder.com/400?text=Photo+${i + 1}`,
+      timestamp: Date.now() - i * 1000,
+      eventId: 'demo',
+    }));
+  }
+
   checkApiKey();
   // Query: Inside folder, not trashed, is image
   const q = `'${folderId}' in parents and trashed=false and mimeType contains 'image/'`;
